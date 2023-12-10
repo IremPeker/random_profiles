@@ -1,4 +1,5 @@
 {
+  "homepage": "https://irempeker.github.io/random_profiles/",
   "name": "random_profiles",
   "version": "0.1.0",
   "private": true,
@@ -17,6 +18,8 @@
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject"
   },
