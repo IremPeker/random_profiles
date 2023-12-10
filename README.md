@@ -1,70 +1,95 @@
-# Getting Started with Create React App
+## Project title
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Random Profiles
+
+## Tech/library used
+
+This project was built by using [Create React App](https://create-react-app.dev/).
+
+## Installation
+
+Install the node modules with `npm install`  
 
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `npm start`
+### `npm start` 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Runs the app in the development mode.<br>
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### `npm test` 
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Launches the test runner in the interactive watch mode.<br>
+See the section about [tests](https://create-react-app.dev/docs/running-tests)  for more information.
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
+Builds the app for the production to the `build` folder.<br>
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+See the section about [creating a production build](https://create-react-app.dev/docs/production-build/) for more information.
 
 ### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+If you aren’t satisfied with the build tool and configuration choices, you can eject at any time. This command will remove the single build dependency from your project.<br>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+See the section about [npm run eject](https://create-react-app.dev/docs/available-scripts/#npm-run-eject) for more information.<br>
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Folder Structure
 
-## Learn More
+After creation, your project should look like this:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
+my-app/
+  README.md
+  node_modules/
+  package.json
+  public/
+    index.html
+    favicon.ico
+  src/
+    components/
+    mocks/
+    styles/
+    tests/
+    utils/
+    App.css
+    App.js
+    index.css
+    index.js
+```
+For the project to build, **these files must exist with the exact filenames**:
+* `public/index.html` is the page template;
+* `src/index.js` is the Javascript entry point.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+You can delete or rename the other files.
 
-### Code Splitting
+You may create subdirectories inside `src` . For faster rebuilds, only files inside `src` are processed by Webpack.<br>
+You need to **put any JS and CSS files inside `src`**, otherwise Webpack won't see them.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+You can however, create more top level directories.<br>
+They will not be included in the production build so you can use them for things like documentation.
 
-### Analyzing the Bundle Size
+## Browser Tests
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+This project is tested in Google Chrome, Safari and Mozilla Firefox Browsers.
 
-### Making a Progressive Web App
+## Unit Tests
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+For the unit tests, [Jest](https://jestjs.io/) is used as a Javascript testing framework. Also [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) is used to test React components.
 
-### Advanced Configuration
+## How to use?
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+After you start the project in localhost, you will see a list of 20 random profiles.
+Details are hidden by default. Use the button to show/hide profile details.
+You can delete the profiles, load more profiles (1 more profile on each click) or renew profiles (20 new random profiles) with respective buttons.
 
-### Deployment
+## Made by
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+[Irem Peker](https://github.com/IremPeker)
 
-### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

@@ -1,0 +1,111 @@
+$backgroundImage: linear-gradient(to right,#d10000,#f60439,#b105f4);
+$hoverButton: #d10000;
+$borderColor: #bebeb9;
+$listBackground: #f5f3ef;
+
+* {
+  box-sizing: border-box;
+}
+
+html, 
+body,
+#root {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+html, 
+body,
+input, 
+button {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+}
+
+p {
+    color: black;
+}
+
+img {
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+@media (min-width: 768px) {
+    img {
+        transition: transform 0.7s ease-in-out;
+        &:hover {
+          transform: scale(1.2);
+        }
+    }
+}
+
+button {
+    margin: 1em;
+    background-image: $backgroundImage;
+    color: white;
+    border:1px solid $borderColor;
+    border-radius:10px;
+    box-shadow: 0px 0px 2px 2px $borderColor;
+    transition: background-image .3s ease-in-out;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.App {
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &--buttonWrapper {
+        display: flex;
+
+        &--loadMoreButton, &--renewProfilesButton {
+            width: 130px;
+            height: 45px;
+            font-size: large;
+        }
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: translate3d(-50%, -50%, 0) rotate(0deg);
+    }
+    100% {
+        transform: translate3d(-50%, -50%, 0) rotate(360deg);
+    }
+}
+
+.spin::before {
+    animation: 1.5s linear infinite spin;
+    animation-play-state: inherit;
+    border: solid 5px #cfd0d1;
+    border-bottom-color: $hoverButton;
+    border-radius: 50%;
+    content: "";
+    height: 80px;
+    width: 80px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    will-change: transform;
+}
