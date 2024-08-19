@@ -27,12 +27,8 @@ describe('App', () => {
         act(() => {
             render(<App data={null} />);
          })
-        const loading = screen.getAllByTestId('loading');
-        await waitForElementToBeRemoved(loading);
-        const errorOverlay = screen.getByTestId('error-overlay');
-        await waitFor(() => {
-            expect(errorOverlay).toBeInTheDocument();
-        })
+        const errorOverlay = await screen.findByTestId('error-overlay');
+        expect(errorOverlay).toBeInTheDocument();
     })
 })
 

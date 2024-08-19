@@ -1,26 +1,27 @@
 import React, { useState } from "react";
 import '../styles/randomProfiles.scss';
+import { RandomUserData } from "../utils/users.definitions";
 
-const RandomProfiles = (props) => {
-    const { profiles, handleDelete } = props;
+const RandomProfiles : React.FC<RandomProfilesProps> = ({profiles, handleDelete}): JSX.Element => {
     const defaultVisibillity = false;
-    const [visible, setVisible] = useState({});
-    const isVisible = (id) => visible[id] || defaultVisibillity;
+    const [visible, setVisible] = useState<Record<number, boolean>>({});
 
-    const handleClick = (id) => () => {
+    const isVisible = (id: number): boolean => visible[id] || defaultVisibillity;
+
+    const handleClick = (id: number): void => {
         setVisible({
             ...visible,
             [id]: !isVisible(id)
         });
     };
 
-    const getFullName = (firstName, lastName, title) => {
+    const getFullName = (firstName: string, lastName: string, title: string): string => {
         const fullName = `${title} ${firstName} ${lastName}`;
         return fullName;
     };
 
-    const getAddress = (street, city, state, postcode) => {
-        const { name, number } = street;
+  
+    const getAddress = ({ name, number }: { name: string, number: number }, city: string, state: string, postcode: string): string => {
         const address = `${name}, ${number}, ${city}, ${state} ${postcode}`;
         return address;
     };
@@ -60,7 +61,7 @@ const RandomProfiles = (props) => {
                         type="button"
                         data-testid="toggleDetails"
                         className="listWrapper--listItem--detailsButton" 
-                        onClick={handleClick(index)}
+                        onClick={() => handleClick(index)}
                     >
                         {!isVisible(index) ? 'Show Details' : 'Hide Details'}
                     </button>
@@ -71,3 +72,8 @@ const RandomProfiles = (props) => {
 }
 
 export default RandomProfiles;
+
+interface RandomProfilesProps {
+    profiles: RandomUserData[];
+    handleDelete: (index: number) => void;
+}

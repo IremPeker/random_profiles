@@ -1,7 +1,7 @@
 import React from "react";
 import '../styles/errorOverlay.scss';
 
-const ErrorOverlay = () => {
+const ErrorOverlay: React.FC = (): React.ReactElement => {
     return (
         <div data-testid="error-overlay" className="errorOverlay">
             <div className="errorOverlay--textWrapper">

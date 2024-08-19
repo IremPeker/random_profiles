@@ -20,5 +20,13 @@ module.exports = function override(config) {
             Buffer: ['buffer', 'Buffer']
         })
     ])
+    // Add TypeScript loader
+    config.module.rules.push({
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+    });
+    // Add TypeScript as a valid module extension
+    config.resolve.extensions.push('.ts', '.tsx');
     return config;
 }

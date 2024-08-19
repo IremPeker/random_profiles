@@ -4,7 +4,9 @@ import './styles/Styles.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(
+  document.getElementById('root') as HTMLElement
+);
 require('dotenv').config();
 root.render(
   <React.StrictMode>

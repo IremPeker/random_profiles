@@ -8,21 +8,21 @@ This project was built by using [Create React App](https://create-react-app.dev/
 
 ## Installation
 
-Install the node modules with `npm install`  
+Install the node modules with `npm install`
 
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `npm start` 
+### `npm start`
 
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-### `npm test` 
+### `npm test`
 
 Launches the test runner in the interactive watch mode.<br>
-See the section about [tests](https://create-react-app.dev/docs/running-tests)  for more information.
+See the section about [tests](https://create-react-app.dev/docs/running-tests) for more information.
 
 ### `npm run build`
 
@@ -58,13 +58,15 @@ my-app/
     tests/
     utils/
     App.css
-    App.js
+    App.tsx
     index.css
-    index.js
+    index.tsx
 ```
+
 For the project to build, **these files must exist with the exact filenames**:
-* `public/index.html` is the page template;
-* `src/index.js` is the Javascript entry point.
+
+- `public/index.html` is the page template;
+- `src/index.tsx` is the Javascript entry point.
 
 You can delete or rename the other files.
 
@@ -91,5 +93,3 @@ You can delete the profiles, load more profiles (1 more profile on each click) o
 ## Made by
 
 [Irem Peker](https://github.com/IremPeker)
-
-

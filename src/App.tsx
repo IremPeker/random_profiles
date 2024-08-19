@@ -2,31 +2,32 @@ import React, { useState, useEffect } from 'react';
 import RandomProfiles from './components/RandomProfiles';
 import ErrorOverlay from './components/ErrorOverlay';
 import { fetchData } from './utils/dataUtils';
+import { RandomUserData } from './utils/users.definitions';
 
-const App = () => {
+const App: React.FC = (): JSX.Element => {
     const initialCount = 20;
-    const [profiles, setProfiles] = useState([]);
-    const [error, setError] = useState(false);
-    const [counter, setCounter] = useState(initialCount);
-    const [loadMoreProfiles, setLoadMoreProfiles] = useState(false);
-    const [loadNewProfiles, setLoadNewProfiles] = useState(true);
-    const [seed, setSeed] = useState('');
+    const [profiles, setProfiles] = useState<RandomUserData | null>(null);
+    const [error, setError] = useState<boolean>(false);
+    const [counter, setCounter] = useState<number>(initialCount);
+    const [loadMoreProfiles, setLoadMoreProfiles] = useState<boolean>(false);
+    const [loadNewProfiles, setLoadNewProfiles] = useState<boolean>(true);
+    const [seed, setSeed] = useState<string>('');
    
     useEffect(() => {
         fetchedData(counter, loadMoreProfiles);
     },[counter, loadNewProfiles, loadMoreProfiles]);
 
-    const fetchedData = async (count, moreProfiles) => {
+    const fetchedData = async (count: number, moreProfiles: boolean): Promise<void> => {
         if (loadNewProfiles || loadMoreProfiles) {
             try {
-                const data = await fetchData(count, moreProfiles, seed);
+                const data: RandomUserData | null = await fetchData(count, moreProfiles, seed);
                 if (data !== null) {
                     setProfiles(data);
                     if (loadNewProfiles) {
                         setSeed(data.info.seed);
                     } 
                 } else {
-                    setProfiles([]);
+                    setProfiles(null);
                     setError(true);
                 }
             } catch (error) {
@@ -38,22 +39,22 @@ const App = () => {
         }
     };
 
-    const handleDelete = (index) => { 
+    const handleDelete = React.useCallback((index: number): void => {
         setLoadMoreProfiles(false);
-        setProfiles(state => ({
-            ...state,
-            results: state.results.filter((item, i) => i !== index)
-        }));
+        setProfiles((prevProfiles: RandomUserData | null) => {
+            const newProfiles = { ...prevProfiles, results: prevProfiles?.results?.filter((item, i) => i !== index) ?? [] };
+            return newProfiles as RandomUserData | null;
+        });
         setCounter(counter-1);
-    };
+    }, [counter]);
 
-    const handleLoadMore = (e) => {
+    const handleLoadMore = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
         e.preventDefault();
         setLoadMoreProfiles(true);
         setCounter(counter+10);
     };
 
-    const handleRenewProfiles = (e) => {
+    const handleRenewProfiles = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
         e.preventDefault();
         setLoadMoreProfiles(false);
         setLoadNewProfiles(true);
@@ -61,7 +62,7 @@ const App = () => {
     };
 
 
-    const LoadMoreButton = () => (
+    const LoadMoreButton = (): JSX.Element => (
         <button 
             type="button"  
             data-testid="fetchDataButton"  
@@ -72,7 +73,7 @@ const App = () => {
         </button>
     );
 
-    const RenewProfilesButton = () => (
+    const RenewProfilesButton = (): JSX.Element => (
         <button 
             type="button"  
             className='App--buttonWrapper--renewProfilesButton' 
@@ -98,8 +99,7 @@ const App = () => {
                 </>
             ) : (
                 <>
-                    <LoadMoreButton />
-                    {error && <ErrorOverlay />}
+                    {error ? <ErrorOverlay /> : <LoadMoreButton />}
                 </>
             )}
         </div>
