@@ -1,4 +1,4 @@
-$backgroundImage: linear-gradient(to right,#d10000,#f60439,#b105f4);
+$backgroundImage: linear-gradient(to right, #d10000, #f60439, #b105f4);
 $hoverButton: #d10000;
 $borderColor: #bebeb9;
 $listBackground: #f5f3ef;
@@ -7,20 +7,20 @@ $listBackground: #f5f3ef;
   box-sizing: border-box;
 }
 
-html, 
+html,
 body,
 #root {
-    height: 100%;
-    width: 100%;
-    padding: 0;
-    margin: 0;
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
 }
 
-html, 
+html,
 body,
-input, 
+input,
 button {
-    font-family: Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 h1,
@@ -29,83 +29,98 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: Arial, Helvetica, sans-serif;
-    color: black;
+  font-family: Arial, Helvetica, sans-serif;
+  color: black;
 }
 
 p {
-    color: black;
+  color: black;
 }
 
 img {
-    object-fit: cover;
-    border-radius: 20px;
+  object-fit: cover;
+  border-radius: 20px;
+  height: 110px;
 }
 
 @media (min-width: 768px) {
-    img {
-        transition: transform 0.7s ease-in-out;
-        &:hover {
-          transform: scale(1.2);
-        }
+  img {
+    transition: transform 0.7s ease-in-out;
+    &:hover {
+      transform: scale(1.2);
     }
+  }
 }
 
 button {
-    margin: 1em;
-    background-image: $backgroundImage;
-    color: white;
-    border:1px solid $borderColor;
-    border-radius:10px;
-    box-shadow: 0px 0px 2px 2px $borderColor;
-    transition: background-image .3s ease-in-out;
+  padding: auto;
+  background-color: #3f3f3f;
+  color: white;
+  border: 1px solid $borderColor;
+  border-radius: 10px;
 
-    &:hover {
-        cursor: pointer;
-    }
+  &:hover {
+    background-color: #222020;
+    cursor: pointer;
+  }
+  &:active {
+    box-shadow: 0 5px #666;
+    transform: translateY(2px);
+  }
 }
 
 .App {
-    height: 100%;
-    width: 100%;
-    background-color: white;
+  height: 100%;
+  width: 100%;
+  background-color: #3f3f3f;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &--buttonWrapper {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
 
-    &--buttonWrapper {
-        display: flex;
-
-        &--loadMoreButton, &--renewProfilesButton {
-            width: 130px;
-            height: 45px;
-            font-size: large;
-        }
+    &--loadMoreButton,
+    &--renewProfilesButton {
+      border-radius: 20px;
+      margin: 1em auto;
+      padding: 0.75em 1em;
+      font-size: 1em;
+      background-color: black;
+      color: white;
+      font-weight: 500;
+      text-transform: uppercase;
+      cursor: pointer;
+      outline: none;
     }
+  }
 }
 
 @keyframes spin {
-    0% {
-        transform: translate3d(-50%, -50%, 0) rotate(0deg);
-    }
-    100% {
-        transform: translate3d(-50%, -50%, 0) rotate(360deg);
-    }
+  0% {
+    transform: translate3d(-50%, -50%, 0) rotate(0deg);
+  }
+  100% {
+    transform: translate3d(-50%, -50%, 0) rotate(360deg);
+  }
 }
 
 .spin::before {
-    animation: 1.5s linear infinite spin;
-    animation-play-state: inherit;
-    border: solid 5px #cfd0d1;
-    border-bottom-color: $hoverButton;
-    border-radius: 50%;
-    content: "";
-    height: 80px;
-    width: 80px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate3d(-50%, -50%, 0);
-    will-change: transform;
+  animation: 1.5s linear infinite spin;
+  animation-play-state: inherit;
+  border: solid 5px #cfd0d1;
+  border-bottom-color: $hoverButton;
+  border-radius: 50%;
+  content: "";
+  height: 80px;
+  width: 80px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  will-change: transform;
 }

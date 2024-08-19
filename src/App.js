@@ -14,7 +14,7 @@ const App = () => {
 
     useEffect(() => {
         fetchedData(counter, loadMoreProfiles);
-    },[counter, loadNewProfiles]);
+    },[counter, loadNewProfiles, loadMoreProfiles]);
 
     const fetchedData = async (count, moreProfiles) => {
         if (loadNewProfiles || loadMoreProfiles) {
@@ -38,54 +38,66 @@ const App = () => {
         }
     };
 
-    const handleDelete = (index) => {  
+    const handleDelete = (index) => { 
         setLoadMoreProfiles(false);
-        const profilesCopy = { ...profiles };
-        profilesCopy.results.splice(index, 1);
-        setProfiles(profilesCopy);
+        setProfiles(state => ({
+            ...state,
+            results: state.results.filter((item, i) => i !== index)
+        }));
         setCounter(counter-1);
     };
 
     const handleLoadMore = (e) => {
         e.preventDefault();
         setLoadMoreProfiles(true);
-        setCounter(counter+1);
+        setCounter(counter+10);
     };
 
     const handleRenewProfiles = (e) => {
         e.preventDefault();
         setLoadMoreProfiles(false);
         setLoadNewProfiles(true);
-        setCounter(initialCount);
+        console.log("renewing profiles, counter: ", counter);
+        
+        setCounter(counter);
     };
+
+    const LoadMoreButton = () => (
+        <button 
+            type="button"  
+            data-testid="fetchDataButton"  
+            className='App--buttonWrapper--loadMoreButton' 
+            onClick={handleLoadMore}
+        >
+            Load More
+        </button>
+    );
+    
+    if (!profiles || loadMoreProfiles || loadNewProfiles) {
+        return <div data-testid="loading" className='spin' />;
+    } 
 
     return (
         <div className="App" data-testid="app">
-            {profiles?.results?.length > 0 ? (
-                <>
-                    <RandomProfiles profiles={profiles.results} handleDelete={handleDelete} />
-                    <div className='App--buttonWrapper'>
-                        <button 
-                            type="button" 
-                            data-testid="fetchDataButton" 
-                            className='App--buttonWrapper--loadMoreButton'
-                            onClick={handleLoadMore}>
-                                Load More
-                        </button>
-                        <button 
-                            type="button" 
-                            className='App--buttonWrapper--renewProfilesButton'
-                            onClick={handleRenewProfiles}>
-                                Renew Profiles
-                        </button>
-                    </div>
-                </>
-            ) : 
-            error ? 
-                <ErrorOverlay />
-                :
-                <div data-testid="loading" className='spin' />
-            }
+          {profiles?.results?.length > 0 ? (
+            <>
+              <RandomProfiles profiles={profiles.results} handleDelete={handleDelete} />
+              <div className='App--buttonWrapper'>
+                <LoadMoreButton />
+                <button 
+                    type="button" 
+                    className='App--buttonWrapper--renewProfilesButton'
+                    onClick={handleRenewProfiles}>
+                        Renew Profiles
+                </button>
+              </div>
+            </>
+          ) : (
+            <>
+                <LoadMoreButton />
+                {error && <ErrorOverlay />}
+            </>
+          )}
         </div>
     );
 }
