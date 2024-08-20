@@ -88,7 +88,7 @@ For the unit tests, [Jest](https://jestjs.io/) is used as a Javascript testing f
 
 After you start the project in localhost, you will see a list of 20 random profiles.
 Details are hidden by default. Use the button to show/hide profile details.
-You can delete the profiles, load more profiles (1 more profile on each click) or renew profiles (20 new random profiles) with respective buttons.
+You can delete the profiles, load more profiles (10 more profiles on each click) or renew all profiles with respective buttons.
 
 ## Made by
 
