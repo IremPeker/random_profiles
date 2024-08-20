@@ -24,15 +24,17 @@ export interface ResultItem {
     }
     email: string;
     cell: string;
-    location: {
-        street: {
-            number: number;
-            name: string;
-        };
-        city: string;
-        state: string;
-        country: string;
-        postcode: number;
+    location: LocationProps;
+}
+
+export interface LocationProps {
+    street: {
+        number: number;
+        name: string;
     };
+    city: string;
+    state: string;
+    country: string;
+    postcode: number;
 }
         

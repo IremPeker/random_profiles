@@ -1,4 +1,3 @@
-import fetchMock from 'jest-fetch-mock';
 import { render, fireEvent, screen, waitFor } from '@testing-library/react';
 import RandomProfiles from '../components/RandomProfiles';
 import { mockedData } from '../mocks/mockUtils';
@@ -26,10 +25,10 @@ describe('RandomProfiles', () => {
             })
         }
         if (listItems) {
-            (listItems as HTMLLIElement[]).forEach((liElement: HTMLLIElement) => {
-                const deleteProfileButton = screen.getAllByTestId('deleteProfile') as HTMLLIElement[];
-                const contentWrapper = screen.getAllByTestId('contentWrapper') as HTMLLIElement[];
-                const toggleDetailsButton = screen.getAllByTestId('toggleDetails') as HTMLLIElement[];
+            (listItems as HTMLLIElement[]).forEach(() => {
+                const deleteProfileButton = screen.getAllByTestId('deleteProfile') as HTMLButtonElement[];
+                const contentWrapper = screen.getAllByTestId('contentWrapper') as HTMLDivElement[];
+                const toggleDetailsButton = screen.getAllByTestId('toggleDetails') as HTMLButtonElement[];
                 expect(deleteProfileButton).toHaveLength(3);
                 expect(contentWrapper).toHaveLength(3);
                 expect(toggleDetailsButton).toHaveLength(3);
@@ -48,16 +47,15 @@ describe('RandomProfiles', () => {
         }
     
         if (listItems) {
-            const contentWrapper = screen.getAllByTestId('contentWrapper') as HTMLLIElement[];
-            const profileGeneral = screen.getAllByTestId('profileGeneral') as HTMLLIElement[];
+            const profileGeneral = screen.getAllByTestId('profileGeneral') as HTMLDivElement[];
             await waitFor(() => {
                 expect(profileGeneral).toHaveLength(3);
             })
            
-            const toggleDetailsButton = screen.getAllByTestId('toggleDetails') as HTMLLIElement[];
+            const toggleDetailsButton = screen.getAllByTestId('toggleDetails') as HTMLButtonElement[];
             toggleDetailsButton.forEach(async(buttonElement) => {
                 fireEvent.click(buttonElement);
-                const profileDetails = screen.getAllByTestId('profileDetails') as HTMLLIElement[];
+                const profileDetails = screen.getAllByTestId('profileDetails') as HTMLDivElement[];
                 await waitFor(() => {
                     expect(profileDetails).toHaveLength(3);
                 })

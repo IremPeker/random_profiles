@@ -80,9 +80,6 @@ button {
 
   &--buttonWrapper {
     display: flex;
-    width: 50%;
-    margin: 0 auto;
-    text-align: center;
 
     &--loadMoreButton,
     &--renewProfilesButton {
@@ -96,6 +93,10 @@ button {
       text-transform: uppercase;
       cursor: pointer;
       outline: none;
+    }
+
+    &--loadMoreButton {
+      margin-right: 1em;
     }
   }
 }

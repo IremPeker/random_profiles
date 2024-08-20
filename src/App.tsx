@@ -42,7 +42,6 @@ const App: React.FC = (): JSX.Element => {
     };
 
     const handleDelete = React.useCallback((index: number): void => {
-        setLoadMoreProfiles(false);
         setProfiles((prevProfiles: RandomUserData | null) => {
             const newProfiles = { ...prevProfiles, results: prevProfiles?.results?.filter((item, i) => i !== index) ?? [] };
             return newProfiles as RandomUserData | null;
@@ -58,7 +57,6 @@ const App: React.FC = (): JSX.Element => {
 
     const handleRenewProfiles = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
         e.preventDefault();
-        setLoadMoreProfiles(false);
         setLoadNewProfiles(true);
         setCounter(counter);
     };

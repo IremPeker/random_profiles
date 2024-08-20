@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import '../styles/randomProfiles.scss';
-import { RandomUserData, ResultItem } from "../utils/users.definitions";
+import { ResultItem, LocationProps } from "../utils/users.definitions";
 
 const RandomProfiles : React.FC<RandomProfilesProps> = ({profiles, handleDelete}): JSX.Element => {
     const defaultVisibillity = false;
@@ -21,8 +21,10 @@ const RandomProfiles : React.FC<RandomProfilesProps> = ({profiles, handleDelete}
     };
 
   
-    const getAddress = ({ name, number }: { name: string, number: number }, city: string, state: string, postcode: number): string => {
-        const address = `${name}, ${number}, ${city}, ${state} ${postcode}`;
+    const getAddress = (location : LocationProps): string => {
+        const { street, city, state } = location;
+        const {name, number} = street;
+        const address = `${name}, ${number}, ${city}, ${state}`;
         return address;
     };
 
@@ -33,13 +35,13 @@ const RandomProfiles : React.FC<RandomProfilesProps> = ({profiles, handleDelete}
                     <button data-testid="deleteProfile" onClick={(e) => {e.preventDefault(); handleDelete(index)}}>Delete Profile</button>
                     <div data-testid="contentWrapper" className="listWrapper--listItem--contentWrapper">
                         {isVisible(index) ?
-                            <div data-testid="profileDetails" className="listWrapper--listItem--contentWrapper--details">
-                                <p>E-mail: {profile.email}</p>    
-                                <p>Phone: {profile.cell}</p>   
-                                <p>Address: {getAddress(profile.location.street, profile.location.city, profile.location.state, profile.location.postcode)}</p>    
-                                <p>Postal Code: {profile.location.postcode}</p>    
-                                <p>Age: {profile.dob.age}</p>    
-                            </div>
+                            <ul data-testid="profileDetails" className="listWrapper--listItem--contentWrapper--details">
+                                <li>E-mail: {profile.email}</li>    
+                                <li>Phone: {profile.cell}</li>   
+                                <li>Address: {getAddress(profile.location)}</li>    
+                                <li>Postal Code: {profile.location.postcode}</li>    
+                                <li>Age: {profile.dob.age}</li>    
+                            </ul>
                             :
                             <div data-testid="profileGeneral" className="listWrapper--listItem--contentWrapper--general">
                                 <h4 data-testid="listFullName" className="listWrapper--listItem--contentWrapper--general--fullName">
