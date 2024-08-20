@@ -22,6 +22,8 @@ const App: React.FC = (): JSX.Element => {
             try {
                 const data: RandomUserData | null = await fetchData(count, moreProfiles, seed);
                 if (data !== null) {
+                    console.log("data is", data);
+                    
                     setProfiles(data);
                     if (loadNewProfiles) {
                         setSeed(data.info.seed);

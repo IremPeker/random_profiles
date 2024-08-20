@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import '../styles/randomProfiles.scss';
-import { RandomUserData } from "../utils/users.definitions";
+import { RandomUserData, ResultItem } from "../utils/users.definitions";
 
 const RandomProfiles : React.FC<RandomProfilesProps> = ({profiles, handleDelete}): JSX.Element => {
     const defaultVisibillity = false;
@@ -21,7 +21,7 @@ const RandomProfiles : React.FC<RandomProfilesProps> = ({profiles, handleDelete}
     };
 
   
-    const getAddress = ({ name, number }: { name: string, number: number }, city: string, state: string, postcode: string): string => {
+    const getAddress = ({ name, number }: { name: string, number: number }, city: string, state: string, postcode: number): string => {
         const address = `${name}, ${number}, ${city}, ${state} ${postcode}`;
         return address;
     };
@@ -74,6 +74,6 @@ const RandomProfiles : React.FC<RandomProfilesProps> = ({profiles, handleDelete}
 export default RandomProfiles;
 
 interface RandomProfilesProps {
-    profiles: RandomUserData[];
+    profiles: ResultItem[];
     handleDelete: (index: number) => void;
 }

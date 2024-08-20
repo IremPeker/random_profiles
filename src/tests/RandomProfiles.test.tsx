@@ -1,18 +1,19 @@
+import fetchMock from 'jest-fetch-mock';
 import { render, fireEvent, screen, waitFor } from '@testing-library/react';
 import RandomProfiles from '../components/RandomProfiles';
 import { mockedData } from '../mocks/mockUtils';
 
 beforeEach(() => {
-    render(<RandomProfiles profiles = {mockedData.results} />);
+    render(<RandomProfiles profiles = {mockedData.results} handleDelete={() => {}}/>);
 })
 
 describe('RandomProfiles', () => {
-    const getUlElement = () => {
-        const ulElement = screen.getByTestId('list');
+    const getUlElement = (): HTMLUListElement => {
+        const ulElement = screen.getByTestId('list') as HTMLUListElement;
         return ulElement;
     }
-    const getListItems = (ulElement) => {
-        const listItems = screen.getAllByTestId('listItem', {container: ulElement});
+    const getListItems = (): HTMLLIElement[] => {
+        const listItems: HTMLLIElement[] = screen.getAllByTestId('listItem') as HTMLLIElement[];
         return listItems;
     }
 
@@ -21,18 +22,18 @@ describe('RandomProfiles', () => {
         let listItems;
         if (ulElement) {
             await waitFor(() => {
-                listItems = getListItems(ulElement);
+                listItems = getListItems();
             })
         }
         if (listItems) {
-            listItems.forEach((liElement) => {
-                const deleteProfileButton = screen.getAllByTestId('deleteProfile', {container: liElement});
-                const contentWrapper = screen.getAllByTestId('contentWrapper', {container: liElement});
-                const toggleDetailsButton = screen.getAllByTestId('toggleDetails', {container: liElement});
+            (listItems as HTMLLIElement[]).forEach((liElement: HTMLLIElement) => {
+                const deleteProfileButton = screen.getAllByTestId('deleteProfile') as HTMLLIElement[];
+                const contentWrapper = screen.getAllByTestId('contentWrapper') as HTMLLIElement[];
+                const toggleDetailsButton = screen.getAllByTestId('toggleDetails') as HTMLLIElement[];
                 expect(deleteProfileButton).toHaveLength(3);
                 expect(contentWrapper).toHaveLength(3);
                 expect(toggleDetailsButton).toHaveLength(3);
-            }); 
+            });    
         }
     })
 
@@ -42,21 +43,21 @@ describe('RandomProfiles', () => {
 
         if (ulElement) {
             await waitFor(() => {
-                listItems = getListItems(ulElement);
+                listItems = getListItems();
             })
         }
     
         if (listItems) {
-            const contentWrapper = screen.getAllByTestId('contentWrapper', {container: listItems});
-            const profileGeneral = screen.getAllByTestId('profileGeneral', {container: contentWrapper});
+            const contentWrapper = screen.getAllByTestId('contentWrapper') as HTMLLIElement[];
+            const profileGeneral = screen.getAllByTestId('profileGeneral') as HTMLLIElement[];
             await waitFor(() => {
                 expect(profileGeneral).toHaveLength(3);
             })
            
-            const toggleDetailsButton = screen.getAllByTestId('toggleDetails', {container: listItems});
+            const toggleDetailsButton = screen.getAllByTestId('toggleDetails') as HTMLLIElement[];
             toggleDetailsButton.forEach(async(buttonElement) => {
                 fireEvent.click(buttonElement);
-                const profileDetails = screen.getAllByTestId('profileDetails', {container: contentWrapper});
+                const profileDetails = screen.getAllByTestId('profileDetails') as HTMLLIElement[];
                 await waitFor(() => {
                     expect(profileDetails).toHaveLength(3);
                 })

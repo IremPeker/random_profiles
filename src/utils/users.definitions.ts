@@ -1,9 +1,20 @@
 export interface RandomUserData {
+    results: ResultItem[];
+   
+    info: {
+        results: number;
+        page: number;
+        seed: string;
+        version: string;
+    };
+}
+
+export interface ResultItem {
     gender: string;
     name: {
-      title: string;
-      first: string;
-      last: string;
+        title: string;
+        first: string;
+        last: string;
     };
     dob: {
         age: number;
@@ -14,18 +25,14 @@ export interface RandomUserData {
     email: string;
     cell: string;
     location: {
-      street: {
-        number: number;
-        name: string;
-      };
-      city: string;
-      state: string;
-      country: string;
-      postcode: string;
+        street: {
+            number: number;
+            name: string;
+        };
+        city: string;
+        state: string;
+        country: string;
+        postcode: number;
     };
-    info: {
-      seed: string;
-    };
-    results: any[];
 }
-  
+        
